@@ -1,4 +1,6 @@
-namespace Plat.Answer.ListNode
+using Plat.Answer.LinkedList.Model;
+
+namespace Plat.Answer.LinkedList
 {
     public static class RecursiveExtension
     {
@@ -7,7 +9,7 @@ namespace Plat.Answer.ListNode
         /// </summary>
         /// <param name="head"></param>
         /// <returns></returns>
-        public static Model.ListNode ReverseList(Model.ListNode head)
+        public static ListNode ReverseList(ListNode head)
         {
             if (head == null)
             {

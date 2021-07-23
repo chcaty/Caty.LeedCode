@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.Linq;
+
 namespace Plat.Answer.Array
 {
     public static class ArrayExtension
@@ -21,6 +24,71 @@ namespace Plat.Answer.Array
                 max = sum > max ? sum : max;
             }
             return max;
+        }
+
+        /// <summary>
+        /// 搜索插入位置
+        /// 给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。
+        /// 请必须使用时间复杂度为 O(log n) 的算法。
+        /// 示例 1:
+        /// 输入: nums = [1,3,5,6], target = 5
+        /// 输出: 2
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <param name="target"></param>
+        /// <returns></returns>
+        public static int SearchInsert(int[] nums, int target)
+        {
+            int left = 0, right = nums.Length - 1;
+            while (left <= right)
+            {
+                var mid = left + ((right - left) / 2);
+                if (nums[mid] < target)
+                {
+                    left = mid + 1;
+                }
+                else if (nums[mid] > target)
+                {
+                    right = mid - 1;
+                }
+                else
+                {
+                    return mid;
+                }
+            }
+            return left;
+        }
+
+        /// <summary>
+        /// 检查是否区域内所有整数都被覆盖
+        /// 给你一个二维整数数组 ranges 和两个整数 left 和 right 。每个 ranges[i] = [starti, endi] 表示一个从 starti 到 endi 的 闭区间 。
+        /// 如果闭区间[left, right] 内每个整数都被 ranges 中 至少一个 区间覆盖，那么请你返回 true ，否则返回 false 。
+        /// 已知区间 ranges[i] = [starti, endi] ，如果整数 x 满足 starti <= x <= endi ，那么我们称整数x 被覆盖了。
+        /// </summary>
+        /// <param name="ranges"></param>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        public static bool IsCovered(int[][] ranges, int left, int right)
+        {
+            var list = new List<int>();
+            for (var i = left; i <= right; i++)
+            {
+                list.Add(i);
+            }
+            for (var i = 0; i < ranges.Length; i++)
+            {
+                var tmpleft = ranges[i][0];
+                var tmpright = ranges[i][1];
+                for (var j = tmpleft; j <= tmpright; j++)
+                {
+                    if (list.Contains(j))
+                    {
+                        list.Remove(j);
+                    }
+                }
+            }
+            return list.Count() > 0 ? false : true;
         }
     }
 }

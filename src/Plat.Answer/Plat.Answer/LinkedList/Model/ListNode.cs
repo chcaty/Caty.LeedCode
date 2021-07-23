@@ -1,4 +1,4 @@
-namespace Plat.Answer.ListNode.Model
+namespace Plat.Answer.LinkedList.Model
 {
     public class ListNode
     {
