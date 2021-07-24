@@ -78,9 +78,9 @@ namespace Plat.Answer.Array
             }
             for (var i = 0; i < ranges.Length; i++)
             {
-                var tmpleft = ranges[i][0];
-                var tmpright = ranges[i][1];
-                for (var j = tmpleft; j <= tmpright; j++)
+                var tmpLeft = ranges[i][0];
+                var tmpRight = ranges[i][1];
+                for (var j = tmpLeft; j <= tmpRight; j++)
                 {
                     if (list.Contains(j))
                     {
