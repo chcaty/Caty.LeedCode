@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -88,7 +90,53 @@ namespace Plat.Answer.Array
                     }
                 }
             }
-            return list.Count() > 0 ? false : true;
+            return !list.Any();
+        }
+
+        /// <summary>
+        /// 存在重复元素
+        /// 给定一个整数数组，判断是否存在重复元素。
+        /// 如果存在一值在数组中出现至少两次，函数返回 true 。如果数组中每个元素都不相同，则返回 false 。
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <returns></returns>
+        public static bool ContainsDuplicate(int[] nums)
+        {
+            System.Array.Sort(nums);
+            var hash = new Hashtable();
+            for (var i = 0; i < nums.Length / 2; i++)
+            {
+                if (hash.Contains(nums[i]))
+                {
+                    return true;
+                }
+
+                hash.Add(nums[i], nums[i]);
+                if (hash.Contains(nums[nums.Length - 1 - i]))
+                {
+                    return true;
+                }
+
+                hash.Add(nums[nums.Length - 1 - i], nums[nums.Length - 1 - i]);
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// 最大子序和
+        /// 给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <returns></returns>
+        public static int MaxSubArray(int[] nums)
+        {
+            int pre = 0, maxAns = nums[0];
+            foreach (var x in nums)
+            {
+                pre = Math.Max(pre + x, x);
+                maxAns = Math.Max(maxAns, pre);
+            }
+            return maxAns;
         }
     }
 }
